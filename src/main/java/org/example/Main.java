@@ -1,17 +1,26 @@
 package org.example;
 
-//TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
-// click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
+import Human.Customer;
+import Human.Staff.Cashier;
+import Human.Staff.Manager;
+import Product.product;
+
+
 public class Main {
     public static void main(String[] args) {
-        //TIP Press <shortcut actionId="ShowIntentionActions"/> with your caret at the highlighted text
-        // to see how IntelliJ IDEA suggests fixing it.
-        System.out.printf("Hello and welcome!");
 
-        for (int i = 1; i <= 5; i++) {
-            //TIP Press <shortcut actionId="Debug"/> to start debugging your code. We have set one <icon src="AllIcons.Debugger.Db_set_breakpoint"/> breakpoint
-            // for you, but you can always add more by pressing <shortcut actionId="ToggleLineBreakpoint"/>.
-            System.out.println("i = " + i);
+            Manager manager = new Manager("Princewill", "1");
+            Cashier cashier = new Cashier("Sarah", "2");
+            Customer customer = new Customer("ZARA", "101");
+            product bread = new product("501", "Wheat Bread", 800.0, 10);
+
+
+            manager.performDuty();
+            cashier.performDuty();
+            manager.addProduct(bread);
+
+
+            System.out.println("\n--- Starting Transaction ---");
+            cashier.sellProduct(customer, bread);
         }
     }
-}

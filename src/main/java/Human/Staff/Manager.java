@@ -6,10 +6,10 @@ import Product.product;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Maneger extends Person implements staffOperation {
+public class Manager extends Person implements staffOperation {
     private List<product> products;
 
-    public Maneger(String name, String id){
+    public Manager(String name, String id){
         super(name, id);
         this.products= new ArrayList<>();
     }
