@@ -20,13 +20,12 @@ public class Customer extends Person{
 
     public void addToCart(List<Product> inventory, String productId, int quantityToBuy) {
         for (Product item : inventory) {
-            if (item.getId() == productId) {
+            if (item.getId().equals(productId)) {
                 shoppingCart.add(item);
                 System.out.println(getName() + " added " + quantityToBuy + "x " + item.getName() + " to the cart.");
                 return;
-            }else {
-                System.out.println("Product ID " + productId + " not found in store!");
             }
         }
+        System.out.println("Product ID " + productId + " not found in store!");
     }
 }
