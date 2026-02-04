@@ -1,35 +1,22 @@
 package fileService;
 
-import Product.product;
+import Product.Product;
 
 import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 
 public class ProductFile {
-    public static void myFile(){
+    private static final String FILE_PATH = "/Users/mac/Downloads/products.csv";
 
-    File myFile = new File("Products.CSV");
+    public static List<Product> readProducts() {
 
-        try {
-            if (myFile.createNewFile()) {
-                System.out.println(myFile.getName() + "Successfully created");
-            } else {
-                System.out.println(myFile.getName() + " Can't be created");
-            }
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-        System.out.println(myFile.getAbsoluteFile());
+        List<Product> products = new ArrayList<>();
 
-    }
-    public static List<product> readproducts() {
-        List<product> products = new ArrayList<>();
-
-      File myFile = new File("Products.CSV");
-
-        try (BufferedReader br = new BufferedReader(new FileReader(myFile))) {
+        try (BufferedReader br = new BufferedReader(new FileReader(FILE_PATH))) {
             String line;
+            br.readLine();
+            System.out.println("skipped header");
             while ((line = br.readLine()) != null) {
 
                 if (line.trim().isEmpty()) continue;
@@ -38,12 +25,7 @@ public class ProductFile {
 
 
                 if (data.length >= 4) {
-                    product p = new product(
-                            data[1].trim(),              // Name
-                            data[0].trim(),              // ID
-                            Double.parseDouble(data[2]), // Price
-                            Integer.parseInt(data[3])    // Quantity
-                    );
+                    Product p = new Product(data[0], data[1], Double.parseDouble(data[2]), Integer.parseInt(data[3]));
                     products.add(p);
                 }
             }
@@ -53,11 +35,11 @@ public class ProductFile {
         return products;
     }
 
-    public static void saveProductsToFile(List<product> products) {
+    public static void saveProductsToFile(List<Product> products) {
 
 
-        try (BufferedWriter bw = new BufferedWriter(new FileWriter("products.CSV"))) {
-            for (product p : products) {
+        try (BufferedWriter bw = new BufferedWriter(new FileWriter(FILE_PATH))) {
+            for (Product p : products) {
 
                 String line = p.getId() + "," + p.getName() + "," + p.getPrice() + "," + p.getQuantity();
                 bw.write(line);
@@ -68,6 +50,4 @@ public class ProductFile {
             System.out.println("Critical Error: Could not write to the database file.");
         }
     }
-
-
 }

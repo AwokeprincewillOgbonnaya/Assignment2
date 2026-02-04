@@ -2,25 +2,27 @@ package Human.Staff;
 
 import Human.Customer;
 import Human.Person;
-import Product.product;
+import Product.Product;
 import Receipt.Receipt;
 import fileService.ProductFile;
 
 import java.util.List;
 
 public class Cashier extends Person implements staffOperation {
-    public Cashier(String name,String id){
+
+    public Cashier(String name, String id) {
         super(name, id);
     }
-    public void sellProduct(Customer customer, List<product> cart, List<product> inventory) {
+
+    public void sellProduct(Customer customer, List<Product> cart, List<Product> inventory) {
         double totalBill = 0;
         boolean atLeastOneItemSold = false;
 
         System.out.println("Processing order for: " + customer.getName());
 
-        for (product cartItem : cart) {
+        for (Product cartItem : cart) {
 
-            for (product invItem : inventory) {
+            for (Product invItem : inventory) {
                 if (invItem.getId() == cartItem.getId()) {
 
 
@@ -41,7 +43,6 @@ public class Cashier extends Person implements staffOperation {
             }
         }
 
-
         if (atLeastOneItemSold) {
 
             ProductFile.saveProductsToFile(inventory);
@@ -57,10 +58,9 @@ public class Cashier extends Person implements staffOperation {
         }
     }
 
-
     @Override
     public void performDuty() {
         System.out.println("Cashier " + getName() + " is currently at the counter processing customer sales.");
     }
-    }
 
+}

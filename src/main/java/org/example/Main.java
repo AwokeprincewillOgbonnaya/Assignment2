@@ -3,7 +3,7 @@ package org.example;
 import Human.Customer;
 import Human.Staff.Cashier;
 import Human.Staff.Manager;
-import Product.product;
+import Product.Product;
 import fileService.ProductFile;
 
 import java.util.List;
@@ -15,10 +15,8 @@ public class Main {
         Manager manager = new Manager("Princewill", "1");
         Cashier cashier = new Cashier("Sarah", "2");
         Customer customer = new Customer("ZARA", "101");
-        List<product> inventory = ProductFile.readproducts();
-        manager.addProductToSystem(inventory,"102", "Coffee", 3000.0, 20);
+        List<Product> inventory = ProductFile.readProducts();
         Store myStore = new Store();
-        inventory = ProductFile.readproducts();
         myStore.openForBusiness(customer, cashier, inventory);
     }
-    }
+}
