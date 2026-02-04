@@ -18,14 +18,14 @@ public class Store {
         boolean shopping = true;
         while (shopping) {
             System.out.print("\nEnter Product ID to buy (or 0 to checkout): ");
-            int id = scanner.nextInt();
+            String id = scanner.next();
 
-            if (id == 0) {
+            if (id.equals("0")) {
                 shopping = false;
             } else {
                 System.out.print("Enter quantity: ");
                 int qty = scanner.nextInt();
-                shopper.addToCart(inventory, "", qty);
+                shopper.addToCart(inventory, id, qty);
             }
         }
 
