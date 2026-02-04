@@ -2,6 +2,7 @@ package Human.Staff;
 
 import Human.Person;
 import Product.product;
+import fileService.ProductFile;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,6 +18,21 @@ public class Manager extends Person implements staffOperation {
         products.add(Product);
         System.out.println(Product.getName() + " added to inventory.");
     }
+
+
+    public void addProductToSystem(List<product> inventory, String id, String name, double price, int quantity) {
+
+        product newProduct = new product(id, name, price, quantity);
+
+
+        inventory.add(newProduct);
+
+
+        ProductFile.saveProductsToFile(inventory);
+
+        System.out.println("Manager " + getName() + " added " + name + " to the system.");
+    }
+
 
 
     @Override
